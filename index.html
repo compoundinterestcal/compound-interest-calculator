@@ -1,20 +1,438 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-  <title>Compound Interest</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Compound Interest Calculator: Formula, Examples, and Step-by-Step Guide</title>
+  <meta name="description" content="Learn compound interest with a teacher-style step-by-step explanation. Includes formulas, examples, growth table, mistakes to avoid, and FAQs. Try the compound interest calculator." />
+  <link rel="canonical" href="https://compoundinterestcal.github.io/compound-interest-calculator/" />
+
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Compound Interest Calculator: Formula, Examples, and Step-by-Step Guide" />
+  <meta property="og:description" content="Teacher-style compound interest explanation with formulas, worked examples, and FAQ." />
+  <meta property="og:type" content="website" />
+
+  <!-- Simple styling -->
+  <style>
+    :root{
+      --bg:#0b1020;
+      --card:#0f1733;
+      --paper:#ffffff;
+      --muted:#6b7280;
+      --text:#111827;
+      --line:#e5e7eb;
+      --brand:#2563eb;
+      --soft:#f5f7ff;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.7;background:#f3f4f6;color:var(--text)}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    header.hero{
+      background: radial-gradient(1200px 600px at 20% 20%, #1d4ed8 0%, transparent 60%),
+                  radial-gradient(900px 500px at 80% 30%, #7c3aed 0%, transparent 60%),
+                  var(--bg);
+      color:#fff;
+      padding:34px 18px;
+    }
+    .wrap{max-width:1100px;margin:0 auto}
+    .hero h1{margin:0;font-size:30px;line-height:1.2}
+    .hero p{margin:10px 0 0;max-width:900px;opacity:.92}
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.35fr .65fr;
+      gap:16px;
+      margin-top:16px;
+    }
+    @media (max-width: 980px){
+      .grid{grid-template-columns:1fr}
+    }
+
+    .card{
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:18px;
+      box-shadow: 0 6px 22px rgba(0,0,0,.06);
+    }
+
+    .side{
+      background:linear-gradient(180deg, #ffffff 0%, #fbfbff 100%);
+    }
+
+    .toc{
+      padding:14px;
+      border-radius:12px;
+      background:var(--soft);
+      border:1px solid #dde5ff;
+    }
+    .toc strong{display:block;margin-bottom:8px}
+    .toc ul{margin:0;padding-left:18px}
+    .toc li{margin:6px 0}
+
+    .mini{
+      margin-top:14px;
+      padding:14px;
+      border-radius:12px;
+      background:#f6fffa;
+      border:1px solid #cceedd;
+    }
+    .mini h3{margin:0 0 8px}
+    .btn{
+      display:inline-block;
+      padding:10px 12px;
+      border-radius:10px;
+      background:var(--brand);
+      color:#fff;
+      font-weight:600;
+      margin-top:8px;
+    }
+    .btn:hover{filter:brightness(.95);text-decoration:none}
+    .k{display:inline-block;padding:2px 8px;border-radius:999px;background:#eef2ff;color:#1e40af;font-size:12px;border:1px solid #dbe1ff}
+
+    h2{margin-top:26px}
+    h3{margin-top:18px}
+    .box{
+      background:var(--soft);
+      border:1px solid #dde5ff;
+      border-radius:12px;
+      padding:14px;
+      margin:14px 0;
+    }
+    pre, code{
+      background:#0b1020;
+      color:#e8ecff;
+      border-radius:10px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    }
+    code{padding:2px 6px}
+    pre{padding:12px;overflow:auto}
+    table{width:100%;border-collapse:collapse;margin:12px 0}
+    th,td{border:1px solid var(--line);padding:10px;text-align:left}
+    th{background:#fafafa}
+    .note{font-size:14px;color:#374151}
+    footer{padding:18px;color:#6b7280;font-size:13px;text-align:center}
+    .hr{height:1px;background:var(--line);margin:18px 0;border:0}
+  </style>
+
+  <!-- FAQ Schema (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is compound interest?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Compound interest is interest calculated on the principal plus the interest already added in previous periods. It is often described as 'interest on interest.'"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the compound interest formula?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The standard compound amount formula is A = P × (1 + r/n)^(n×t), where P is principal, r is annual rate as a decimal, n is compounding periods per year, and t is time in years."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I calculate compound interest only?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "First calculate A using the compound formula, then compute CI = A − P."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does more frequent compounding increase returns?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, generally monthly or quarterly compounding produces a slightly higher final amount than yearly compounding, because interest is added more often."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
+
 <body>
-  <h1>Compound Interest</h1>
+  <header class="hero">
+    <div class="wrap">
+      <span class="k">Math • Finance • Step-by-step</span>
+      <h1>Compound Interest Calculator: Formula, Examples, and Step-by-Step Guide</h1>
+      <p>
+        This page teaches compound interest like a real teacher: clear definitions, correct formulas, worked examples,
+        and a growth table so you can verify each step. Use it for savings, investments, and understanding loans.
+      </p>
+    </div>
+  </header>
 
-  <p>
-    This page explains compound interest with formulas and examples.
-  </p>
+  <main class="wrap">
+    <div class="grid">
+      <!-- Main content -->
+      <article class="card">
+        <p>
+          Compound interest means your money grows not only on the original amount (called the <strong>principal</strong>)
+          but also on the interest that was added earlier. In other words, when interest is added to your balance,
+          that new balance becomes the base for the next calculation. Over time, this creates a “snowball” effect.
+        </p>
 
-  <p>
-    Use this online compound interest calculator:
-    <a href="https://www.compoundinterestcalculatortool.com">
-      Online compound interest calculator
-    </a>
-  </p>
+        <!-- ✅ 2nd paragraph anchor tag exactly -->
+        <p>
+          To quickly check results after you understand the concept, use this
+          <a href="https://www.compoundinterestcalculatortool.com/" target="_blank" rel="noopener noreferrer">compound interest calculator</a>
+          to compute final amount, total interest, and year-by-year growth. But first, we’ll learn the math
+          so the calculator output makes sense and you can spot mistakes instantly.
+        </p>
+
+        <div class="toc" id="toc">
+          <strong>Table of Contents</strong>
+          <ul>
+            <li><a href="#terms">1) Key Terms</a></li>
+            <li><a href="#formula">2) Compound Interest Formula</a></li>
+            <li><a href="#yearly-example">3) Worked Example (Yearly)</a></li>
+            <li><a href="#simple-vs-compound">4) Simple vs Compound Interest</a></li>
+            <li><a href="#monthly-example">5) Monthly Compounding Example</a></li>
+            <li><a href="#table">6) Growth Table</a></li>
+            <li><a href="#mistakes">7) Common Mistakes</a></li>
+            <li><a href="#tips">8) Practical Tips</a></li>
+            <li><a href="#faq">9) FAQ</a></li>
+          </ul>
+        </div>
+
+        <hr class="hr" />
+
+        <h2 id="terms">1) Key Terms (Understand These First)</h2>
+        <div class="box">
+          <ul>
+            <li><strong>Principal (P)</strong>: the starting amount (example: ₹10,000).</li>
+            <li><strong>Rate (r)</strong>: annual interest rate as a decimal (10% = 0.10).</li>
+            <li><strong>Time (t)</strong>: total time in years.</li>
+            <li><strong>Compounding frequency (n)</strong>: how many times interest is added per year (yearly=1, quarterly=4, monthly=12).</li>
+            <li><strong>Amount (A)</strong>: final total after compounding.</li>
+            <li><strong>Compound Interest (CI)</strong>: total interest earned, calculated as <strong>CI = A − P</strong>.</li>
+          </ul>
+        </div>
+
+        <h2 id="formula">2) Compound Interest Formula (Main Formula)</h2>
+        <p>
+          The standard compound interest amount formula is:
+        </p>
+        <pre><code>A = P × (1 + r/n)^(n×t)</code></pre>
+        <p class="note">
+          How to read it: “Amount equals principal times (1 plus rate divided by number of compounds) raised to (number of compounds times time).”
+        </p>
+
+        <h3>What each symbol means</h3>
+        <ul>
+          <li><strong>P</strong> = principal (starting money)</li>
+          <li><strong>r</strong> = annual interest rate in decimal form</li>
+          <li><strong>n</strong> = number of compounding periods per year</li>
+          <li><strong>t</strong> = years</li>
+          <li><strong>A</strong> = final amount after interest</li>
+        </ul>
+
+        <h2 id="yearly-example">3) Worked Example (Yearly Compounding) — Teacher Style</h2>
+        <p>
+          Let’s say you invest <strong>₹10,000</strong> at <strong>10% per year</strong> for <strong>3 years</strong>, compounded <strong>yearly</strong>.
+          So: P = 10000, r = 0.10, n = 1, t = 3.
+        </p>
+
+        <div class="box">
+          <p><strong>Step 1:</strong> Write the formula</p>
+          <pre><code>A = P × (1 + r/n)^(n×t)</code></pre>
+
+          <p><strong>Step 2:</strong> Substitute values</p>
+          <pre><code>A = 10000 × (1 + 0.10/1)^(1×3)</code></pre>
+
+          <p><strong>Step 3:</strong> Simplify inside brackets and exponent</p>
+          <pre><code>A = 10000 × (1.10)^3</code></pre>
+
+          <p><strong>Step 4:</strong> Compute the power</p>
+          <pre><code>(1.10)^3 = 1.10 × 1.10 × 1.10 = 1.331</code></pre>
+
+          <p><strong>Step 5:</strong> Multiply by principal to get the amount</p>
+          <pre><code>A = 10000 × 1.331 = ₹13,310</code></pre>
+
+          <p><strong>Step 6:</strong> Find compound interest only</p>
+          <pre><code>CI = A − P = 13310 − 10000 = ₹3,310</code></pre>
+        </div>
+
+        <h2 id="simple-vs-compound">4) Simple Interest vs Compound Interest (Clear Difference)</h2>
+        <p>
+          <strong>Simple interest</strong> calculates interest only on the principal:
+        </p>
+        <pre><code>SI = P × r × t</code></pre>
+        <p>
+          For the same example: SI = 10000 × 0.10 × 3 = ₹3,000.
+          But compound interest gave ₹3,310. The extra ₹310 happens because in year 2 and year 3,
+          interest is calculated on a bigger amount (principal + previous interest).
+        </p>
+
+        <h2 id="monthly-example">5) Same Example, But Compounded Monthly</h2>
+        <p>
+          Now we compound monthly. The values: P = 10000, r = 0.10, t = 3, n = 12.
+        </p>
+        <div class="box">
+          <pre><code>A = 10000 × (1 + 0.10/12)^(12×3)
+A = 10000 × (1 + 0.0083333)^(36)
+A = 10000 × (1.0083333)^(36)</code></pre>
+          <p>
+            This power is not fun to do by hand, so a calculator is practical. Approximate result:
+          </p>
+          <pre><code>A ≈ ₹13,489
+CI ≈ ₹3,489</code></pre>
+          <p class="note">
+            Monthly compounding is usually slightly higher than yearly because interest gets added sooner and starts earning interest earlier.
+          </p>
+        </div>
+
+        <h2 id="table">6) Growth Table (Year-by-Year Verification)</h2>
+        <p>
+          For yearly compounding at 10% with P = ₹10,000:
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Year</th>
+              <th>Starting Amount</th>
+              <th>Interest (10%)</th>
+              <th>Ending Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>₹10,000</td>
+              <td>₹1,000</td>
+              <td>₹11,000</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>₹11,000</td>
+              <td>₹1,100</td>
+              <td>₹12,100</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>₹12,100</td>
+              <td>₹1,210</td>
+              <td>₹13,310</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="note">
+          Notice how the interest grows each year (₹1,000 → ₹1,100 → ₹1,210). That is compounding in action.
+        </p>
+
+        <h2 id="mistakes">7) Common Mistakes (And How to Avoid Them)</h2>
+        <div class="box">
+          <ul>
+            <li><strong>Mistake 1:</strong> Using 10 instead of 0.10. Always convert percent to decimal: 10% = 0.10.</li>
+            <li><strong>Mistake 2:</strong> Forgetting n×t in the exponent. The power must be <code>(n×t)</code>, not just <code>t</code>.</li>
+            <li><strong>Mistake 3:</strong> Mixing months and years. If time is in months, convert to years or adjust n correctly.</li>
+            <li><strong>Mistake 4:</strong> Confusing A and CI. A is total amount, CI is only interest: <code>CI = A − P</code>.</li>
+          </ul>
+        </div>
+
+        <h2 id="tips">8) Practical Tips (Real-Life Use)</h2>
+        <p>
+          Compound interest appears everywhere:
+        </p>
+        <ul>
+          <li><strong>Savings & investments:</strong> long-term growth becomes powerful because compounding rewards time.</li>
+          <li><strong>Loans:</strong> interest can compound too, especially when interest is added periodically.</li>
+          <li><strong>Planning:</strong> small differences in rate or time create big differences after many years.</li>
+        </ul>
+        <p>
+          A simple rule: if you want compounding to help you, start early and stay consistent.
+          If compounding is working against you (like credit card debt), pay it down quickly.
+        </p>
+
+        <h2 id="faq">9) FAQ</h2>
+        <h3>How do I calculate only compound interest?</h3>
+        <p>
+          First compute A using the compound formula, then subtract principal:
+          <strong>CI = A − P</strong>.
+        </p>
+
+        <h3>Does more frequent compounding always mean more money?</h3>
+        <p>
+          Usually yes, but the difference between monthly and daily may be small for short durations.
+          Over long periods, it becomes more noticeable.
+        </p>
+
+        <h3>What if I add money every month?</h3>
+        <p>
+          Then we use a “future value of a series” formula. Many calculators support monthly contributions automatically.
+        </p>
+
+        <hr class="hr" />
+
+        <p class="note">
+          ✅ If you are using GitHub Pages: keep this file name exactly <strong>index.html</strong> in the repository root (same level as README.md).
+          Commit changes and your site updates.
+        </p>
+      </article>
+
+      <!-- Sidebar -->
+      <aside class="card side">
+        <div class="toc">
+          <strong>Quick Actions</strong>
+          <ul>
+            <li><a href="#toc">Jump to TOC</a></li>
+            <li><a href="#formula">Go to Formula</a></li>
+            <li><a href="#yearly-example">Go to Example</a></li>
+            <li><a href="#faq">Go to FAQ</a></li>
+          </ul>
+        </div>
+
+        <div class="mini">
+          <h3>Use the Calculator</h3>
+          <p class="note">
+            After reading, you can verify the same example instantly using the calculator.
+          </p>
+          <a class="btn" href="https://www.compoundinterestcalculatortool.com/" target="_blank" rel="noopener noreferrer">
+            Open Compound Interest Calculator
+          </a>
+        </div>
+
+        <div class="mini">
+          <h3>GitHub Pages Checklist</h3>
+          <ul class="note">
+            <li>File must be named: <strong>index.html</strong></li>
+            <li>Place it in repo root (same level as README.md)</li>
+            <li>Commit changes</li>
+            <li>Settings → Pages → Branch: <strong>main</strong> + <strong>/(root)</strong></li>
+            <li>Wait 1–5 minutes and refresh</li>
+          </ul>
+        </div>
+
+        <div class="mini">
+          <h3>Need 500+ words in README too?</h3>
+          <p class="note">
+            If your requirement is “500 words on GitHub”, you can also paste a long version into <strong>README.md</strong>
+            (GitHub shows it on the repo homepage).
+          </p>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer>
+    © <span id="y"></span> Compound Interest Guide • Built on GitHub Pages
+  </footer>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
